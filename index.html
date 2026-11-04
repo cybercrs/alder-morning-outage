@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14382f">
+  <title>The Morning Outage — Alder Community Services</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./panel.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to workspace</a>
+  <div id="storage-warning" role="status" hidden></div>
+  <section id="welcome" class="welcome" aria-labelledby="welcome-title">
+    <div class="welcome-brand"><span class="brand-mark" aria-hidden="true">a</span><span>ALDER<br><small>COMMUNITY SERVICES</small></span></div>
+    <div class="welcome-copy"><p class="eyebrow">INTERNAL ASSURANCE</p><h1 id="welcome-title">The Morning<br>Outage</h1><p class="welcome-lede">Meal delivery service is interrupted.<br>Management needs your team’s assessment.</p><p>Review the records in Alder Drive and prepare your team’s brief. Keep the workspace open for messages from colleagues.</p></div>
+    <form id="start-form" class="start-form">
+      <h2>Your team workspace</h2><p>Choose one recorder to maintain the team’s brief.</p>
+      <label for="team-name">Team name</label><input id="team-name" name="team" maxlength="100" required autocomplete="off" placeholder="Enter your team name">
+      <button class="primary" type="submit">Begin <span aria-hidden="true">↗</span></button>
+      <div id="resume-controls" hidden><p id="resume-description"></p><button type="button" id="resume-button" class="secondary">Return to workspace</button><button type="button" id="new-button" class="text-button">Start a new brief</button></div>
+      <button type="button" id="restore-button" class="text-button">Open a saved copy</button>
+      <input type="file" id="restore-file" accept=".json,application/json" hidden>
+      <p id="welcome-error" class="error" role="alert"></p>
+    </form>
+    <p class="welcome-footer">ALDER COMMUNITY SERVICES <span>Operations · Risk · Assurance</span></p>
+  </section>
+  <div id="app" class="app" hidden>
+    <aside class="sidebar" aria-label="Workspace navigation">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">a</span><span>ALDER<small>COMMUNITY SERVICES</small></span></div>
+      <p class="sidebar-label">TEAM WORKSPACE</p>
+      <nav><button id="nav-drive" class="nav-button selected" data-view="drive"><span data-icon="folder"></span>Alder Drive<span id="file-count" class="nav-count">1</span></button><button id="nav-inbox" class="nav-button" data-view="inbox"><span data-icon="mail"></span>Inbox<span id="inbox-count" class="nav-count">1</span></button><button id="nav-brief" class="nav-button" aria-controls="working-panel" aria-expanded="false" title="Working file"><span data-icon="edit"></span>Working file</button></nav>
+      <div class="sidebar-task"><p class="sidebar-label">CURRENT REQUEST</p><p id="task-summary"></p><button id="request-button" class="sidebar-link">Read message <span aria-hidden="true">↗</span></button></div>
+      <div class="sidebar-bottom"><div class="avatar" aria-hidden="true">IA</div><div><strong id="sidebar-team"></strong><small>Internal assurance</small></div></div>
+    </aside>
+    <div class="shell">
+      <main id="main-content" class="main-content" tabindex="-1">
+        <section id="drive-view" aria-labelledby="drive-heading"><div class="page-heading"><div><p class="eyebrow">SHARED WORKSPACE</p><h1 id="drive-heading">Alder Drive</h1><p>Records for your team’s assessment</p></div><span class="drive-label"><span data-icon="cloud"></span>Case documents</span></div><div class="drive-context"><div><span class="status-dot"></span><strong>RouteWell service interruption</strong><p>Review the available records. Keep your findings and recommendations in the working file.</p></div><button id="initial-button" class="text-button">Read situation report <span aria-hidden="true">↗</span></button></div><div class="drive-toolbar"><h2>Shared files <span id="drive-total"></span></h2><span id="latest-records"></span></div><div class="file-table-wrap"><table class="file-table"><thead><tr><th scope="col">Document</th><th scope="col">From</th><th scope="col">Received</th></tr></thead><tbody id="file-list"></tbody></table></div></section>
+        <section id="inbox-view" hidden aria-labelledby="inbox-heading"><div class="page-heading"><div><p class="eyebrow">TEAM CORRESPONDENCE</p><h1 id="inbox-heading">Inbox</h1><p>Messages and supporting documents</p></div></div><div id="message-list" class="message-list"></div></section>
+        <section id="document-view" hidden aria-labelledby="document-title"><button id="back-drive" class="back-button">← Alder Drive</button><article class="document-paper"><div class="document-masthead"><span class="wordmark">ALDER</span><span>COMMUNITY SERVICES</span></div><p class="eyebrow" id="document-type"></p><h1 id="document-title" tabindex="-1"></h1><dl id="document-meta" class="document-meta"></dl><div id="document-body" class="document-body"></div></article></section>
+      </main>
+    </div>
+    <div id="working-scrim" class="working-scrim" hidden aria-hidden="true"></div>
+    <aside id="working-panel" class="working-panel" hidden aria-labelledby="working-heading"><header class="working-heading"><div><p class="eyebrow">TEAM WORKING FILE</p><h2 id="working-heading">Internal assurance brief</h2></div><button id="close-working" class="icon-button" aria-label="Close working file">×</button></header><div class="working-meta"><span id="working-team"></span><span id="save-status" role="status">Saved</span></div><div id="section-tabs" class="section-tabs" role="group" aria-label="Brief sections"></div><div id="working-fields" class="working-fields"></div><footer class="working-footer"><button id="download-brief" class="primary"><span data-icon="download"></span>Download brief</button><div><button id="history-button" class="text-button">Earlier drafts</button><button id="save-copy" class="text-button">Save a copy</button></div><p>Download one final brief for your team’s submission.</p></footer></aside>
+    <div id="arrival-toast" class="arrival-toast" role="status" aria-live="polite" hidden></div>
+    <button id="mail-button" class="mail-button" aria-label="Open inbox"><span data-icon="mail"></span><span id="mail-badge" class="mail-badge"></span></button>
+  </div>
+  <dialog id="message-dialog" aria-labelledby="mail-subject"><div class="dialog-top"><span class="eyebrow">ALDER MAIL</span><button id="close-message" class="icon-button" aria-label="Close email">×</button></div><h2 id="mail-subject"></h2><p id="mail-sender" class="mail-sender"></p><div id="mail-body"></div><div id="mail-attachments" class="mail-attachments"></div></dialog>
+  <dialog id="history-dialog" aria-labelledby="history-heading"><div class="dialog-top"><h2 id="history-heading">Earlier drafts</h2><button id="close-history" class="icon-button" aria-label="Close earlier drafts">×</button></div><div id="history-body"></div></dialog>
+  <noscript>This workspace needs JavaScript. Enable it in your browser to open the case and working file.</noscript>
+</body>
+</html>

@@ -1,0 +1,6 @@
+.working-scrim{position:fixed;inset:0;background:#12352a44;z-index:34}
+.working-panel{top:0}
+.section-description{margin-bottom:10px}
+.response-guidance{font-size:12px;line-height:1.6;color:var(--muted);margin-bottom:22px}
+@media(min-width:1000px){.working-scrim{display:none}}
+@media(max-width:1000px){.working-panel{box-shadow:-6px 0 30px #12352a22}.working-open .mail-button{display:none}}
